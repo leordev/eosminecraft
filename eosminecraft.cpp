@@ -57,7 +57,6 @@ public:
   TABLE tokenstats
   {
     name token_name;
-    name category;
     uint64_t global_id;
     name issuer;
     bool fungible;
@@ -151,9 +150,43 @@ public:
 
   void _update_symbolinfo(const symbolinfo &si) { _symbolinfo.set(si, _self); }
 
+  /*** Helpers ***/
+  void _check_and_add_category(name category)
+  {
+    auto cat = _categoryinfos.find(category.value);
+    if (cat == _categoryinfos.end())
+    {
+      _categoryinfos.emplace(_self, [&](auto &r) {
+        r.category = category;
+      });
+    }
+  }
+
   /*** Contract Actions ***/
 
-  ACTION create(name issuer, name category, name token_name, bool fungible, bool burnable, bool transferable, int64_t max_supply) {}
+  ACTION create(name issuer, name category, name token_name, bool fungible, bool burnable, bool transferable, int64_t max_supply)
+  {
+    require_auth(_self);
+
+    check(max_supply > 0, "max-supply must be positive");
+
+    tokenstatss _stats(_self, category.value);
+    auto token = _stats.find(token_name.value);
+    check(token == _stats.end(), "token already exists");
+
+    _check_and_add_category(category);
+
+    _stats.emplace(_self, [&](auto &r) {
+      r.token_name = token_name;
+      r.global_id = _next_id();
+      r.issuer = issuer;
+      r.fungible = fungible;
+      r.burnable = burnable;
+      r.transferable = transferable;
+      r.current_supply = 0;
+      r.max_supply = max_supply;
+    });
+  }
 
   ACTION issue(name to, name category, name token_name, double quantity, string metadata_uri, string memo) {}
 
@@ -165,7 +198,7 @@ public:
 
   ACTION transfernft(name from, name to, vector<uint64_t> tokeninfo_ids, string memo) {}
 
-  ACTION transfer(name from, name to, uint64_t global_id, double quantity) {}
+  ACTION transfer(name from, name to, uint64_t global_id, double quantity, string memo) {}
 };
 
 EOSIO_DISPATCH(eosminecraft, (create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer))
