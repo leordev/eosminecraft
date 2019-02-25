@@ -32,7 +32,16 @@ fun sanitize(dirty: String): String {
     } else clean
 
     val end = if (res.length > 12) 12 else res.length
-    return res.substring(0, end)
+
+    val unperiodRes = if (end == 12 && res[11] == '.') {
+        var p = res
+        while(p[11] == '.') {
+            p = if (p.length > 12) p.substring(0, 11) + p[12] else p.substring(0,11) + "1"
+        }
+        p
+    } else res
+
+    return unperiodRes.substring(0, end)
 }
 
 fun dump() {
