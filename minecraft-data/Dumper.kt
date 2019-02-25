@@ -16,6 +16,23 @@ data class DumpRow(val catSrc: String,
     }
 }
 
+fun dump() {
+    val items = Registry.ITEM.ids
+
+    val rows = items.map {
+        DumpRow(it.namespace, it.path, sanitize(it.namespace), sanitize(it.path), true, true, true,999_999_999_999)
+    }.sortedBy { it.category + "." + it.token }
+            .fold(listOf<DumpRow>()) { acc, element ->
+                acc + deduplicatedElement(element, acc)
+            }
+
+    val header = "cat_src;item_src;category;token_name;fungible;burnable;transferable;max_supply\n"
+    val res = header + rows.joinToString("\n")
+    save(res)
+
+    saveCleos(rows)
+}
+
 fun sanitize(dirty: String): String {
     val re = Regex("0|[6-9]")
 
@@ -44,36 +61,19 @@ fun sanitize(dirty: String): String {
     return unperiodRes.substring(0, end)
 }
 
-fun dump() {
-    val items = Registry.ITEM.ids
+fun deduplicatedElement(element: DumpRow, list: List<DumpRow>) : DumpRow {
+    var el = element.copy()
 
-    val rows = items.map {
-        DumpRow(it.namespace, it.path, sanitize(it.namespace), sanitize(it.path), true, true, true,999_999_999_999)
-    }.sortedBy { it.category + "." + it.token }
-            .fold(listOf<DumpRow>()) { acc, element ->
-                var el = element.copy()
+    var i = 1
+    while(list.any { it.category == el.category && it.token == el.token }  ) {
+        println("Found duplicated: ${el.token}")
+        el = el.copy(token = element.token.dropLast(i.toString().length) + i)
 
-                var i = 1
-                println("checking duplicated: ${el.token}  ")
-                if (el.token == "blue.sta.gla") {
-                    println(acc)
-                }
-                while(acc.any { it.category == el.category && it.token == el.token }  ) {
-                    println("Found duplicated: ${el.token}  ")
-                    el = el.copy(token = element.token.dropLast(i.toString().length) + i)
+        // only 1-5 allowed, hoping it does not have 25+ dups
+        if (i % 5 == 0) i += 6 else i++
+    }
 
-                    // only 1-5 allowed, hoping it does not have 25+ dups
-                    if (i % 5 == 0) i += 6 else i++
-                }
-
-                acc + el
-            }
-
-    val header = "cat_src;item_src;category;token_name;fungible;burnable;transferable;max_supply\n"
-    val res = header + rows.joinToString("\n")
-    save(res)
-
-    saveCleos(rows)
+    return el
 }
 
 fun save(content: String) {
