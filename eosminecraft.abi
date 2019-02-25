@@ -1,5 +1,5 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Sun Feb 24 11:21:59 2019",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Sun Feb 24 19:59:59 2019",
     "version": "eosio::abi/1.1",
     "structs": [
         {
@@ -137,6 +137,16 @@
                 {
                     "name": "pause",
                     "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "reset",
+            "base": "",
+            "fields": [
+                {
+                    "name": "category",
+                    "type": "name"
                 }
             ]
         },
@@ -296,6 +306,11 @@
         {
             "name": "pausexfer",
             "type": "pausexfer",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "reset",
+            "type": "reset",
             "ricardian_contract": ""
         },
         {

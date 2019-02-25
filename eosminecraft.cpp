@@ -164,6 +164,23 @@ public:
 
   /*** Contract Actions ***/
 
+  ACTION reset(name category)
+  {
+    // debug reset data
+    require_auth(_self);
+
+    auto si = _get_symbolinfo();
+    si.global_id = 0;
+    _update_symbolinfo(si);
+
+    tokenstatss _stats(_self, category.value);
+    auto itr = _stats.begin();
+    while (itr != _stats.end())
+    {
+      itr = _stats.erase(itr);
+    }
+  }
+
   ACTION create(name issuer, name category, name token_name, bool fungible, bool burnable, bool transferable, int64_t max_supply)
   {
     require_auth(_self);
@@ -201,4 +218,4 @@ public:
   ACTION transfer(name from, name to, uint64_t global_id, double quantity, string memo) {}
 };
 
-EOSIO_DISPATCH(eosminecraft, (create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer))
+EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer))
