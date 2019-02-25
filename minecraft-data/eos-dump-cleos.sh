@@ -1,128 +1,128 @@
 set -e
 CLEOS="cleos -u http://jungle2.cryptolions.io:80 "
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.boat", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.butto", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.door", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.fen.g", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.fence", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.leave", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.log", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.plank", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.pre.p", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.sapli", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.sign", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.slab", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.stair", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.trapd", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.wood", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "activator.ra", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "air", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "allium", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite.sla", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite.sta", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite.wal", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "anvil", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "apple", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "armor.stand", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "arrow", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "azure.bluet", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "baked.potato", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bamboo", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "barrel", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "barrier", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bat.spa.egg", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beacon", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bedrock", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beef", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beetroot", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beetroot.see", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beetroot.sou", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bell", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.boat", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.button", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.door", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.fen.ga", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.fence", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.leaves", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.log", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.planks", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.pre.pl", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.saplin", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.sign", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.slab", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.stairs", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.trapdo", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.wood", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.banner", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.bed", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.carpet", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.con.po", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.concre", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.dye", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.gla.te", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.shu.bo", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.sta.gl", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.sta.g1", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.terrac", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.wool", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blast.furnac", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blaze.powder", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blaze.rod", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blaze.spa.eg", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.banner", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.bed", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.carpet", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.con.pow", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.concret", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.dye", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.gla.ter", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.ice", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.orchid", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.shu.box", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.sta.gla", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.sta.gl1", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.terraco", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.wool", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bone", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bone.block", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bone.meal", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "book", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bookshelf", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bow", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bowl", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brain.cor.bl", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brain.cor.fa", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brain.coral", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bread", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brewing.stan", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick.slab", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick.stairs", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick.wall", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bricks", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.banner", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.bed", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.carpet", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.con.po", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.concre", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.dye", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.gla.te", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.mus.bl", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.mushro", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.shu.bo", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.sta.gl", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.sta.g1", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.terrac", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.wool", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bubble.cor.b", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bubble.cor.f", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bubble.coral", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bucket", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "cactus", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "cake", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "campfire", true, true, true, 999999999999]' -p eosminecraft
-# $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "carrot", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.boat", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.butto", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.door", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.fen.g", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.fence", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.leave", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.log", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.plank", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.pre.p", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.sapli", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.sign", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.slab", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.stair", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.trapd", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.wood", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "activator.ra", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "air", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "allium", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite.sla", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite.sta", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "andesite.wal", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "anvil", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "apple", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "armor.stand", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "arrow", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "azure.bluet", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "baked.potato", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bamboo", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "barrel", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "barrier", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bat.spa.egg", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beacon", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bedrock", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beef", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beetroot", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beetroot.see", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "beetroot.sou", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bell", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.boat", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.button", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.door", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.fen.ga", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.fence", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.leaves", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.log", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.planks", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.pre.pl", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.saplin", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.sign", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.slab", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.stairs", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.trapdo", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.wood", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.banner", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.bed", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.carpet", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.con.po", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.concre", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.dye", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.gla.te", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.shu.bo", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.sta.gl", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.sta.g1", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.terrac", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "black.wool", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blast.furnac", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blaze.powder", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blaze.rod", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blaze.spa.eg", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.banner", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.bed", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.carpet", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.con.pow", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.concret", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.dye", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.gla.ter", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.ice", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.orchid", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.shu.box", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.sta.gla", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.sta.gl1", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.terraco", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "blue.wool", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bone", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bone.block", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bone.meal", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "book", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bookshelf", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bow", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bowl", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brain.cor.bl", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brain.cor.fa", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brain.coral", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bread", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brewing.stan", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick.slab", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick.stairs", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brick.wall", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bricks", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.banner", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.bed", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.carpet", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.con.po", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.concre", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.dye", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.gla.te", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.mus.bl", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.mushro", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.shu.bo", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.sta.gl", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.sta.g1", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.terrac", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "brown.wool", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bubble.cor.b", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bubble.cor.f", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bubble.coral", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "bucket", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "cactus", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "cake", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "campfire", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "carrot", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "carrot.on.as", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "cartographyt", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "carved.pumpk", true, true, true, 999999999999]' -p eosminecraft
