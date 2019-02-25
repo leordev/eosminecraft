@@ -12,7 +12,7 @@ data class DumpRow(val catSrc: String,
                    val transferable: Boolean,
                    val maxSupply: Long) {
     override fun toString(): String {
-        return "$catSrc;$itemSrc;$category;$token;$fungible;$burnable;$transferable;$maxSupply"
+        return "$catSrc,$itemSrc,$category,$token,$fungible,$burnable,$transferable,$maxSupply"
     }
 }
 
@@ -26,7 +26,7 @@ fun dump() {
                 acc + deduplicatedElement(element, acc)
             }
 
-    val header = "cat_src;item_src;category;token_name;fungible;burnable;transferable;max_supply\n"
+    val header = "cat_src,item_src,category,token_name,fungible,burnable,transferable,max_supply\n"
     val res = header + rows.joinToString("\n")
     save(res)
 
