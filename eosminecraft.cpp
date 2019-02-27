@@ -88,8 +88,6 @@ public:
 
     uint64_t primary_key() const { return id; }
     uint64_t get_owner() const { return owner.value; }
-    uint64_t get_token_name() const { return token_name.value; }
-    uint64_t get_category() const { return category.value; }
   };
 
   /***
@@ -162,6 +160,39 @@ public:
     }
   }
 
+  void _sub_balance(name owner, uint64_t global_id, double quantity)
+  {
+    accounts from_acnts(_self, owner.value);
+
+    const auto &from = from_acnts.get(global_id, "no balance object found");
+    eosio_assert(from.amount >= quantity, "overdrawn balance");
+
+    from_acnts.modify(from, owner, [&](auto &r) {
+      r.amount -= quantity;
+    });
+  }
+
+  void _add_balance(name owner, uint64_t global_id, name category, name token_name, double quantity, name ram_payer)
+  {
+    accounts to_acnts(_self, owner.value);
+    auto to = to_acnts.find(global_id);
+    if (to == to_acnts.end())
+    {
+      to_acnts.emplace(ram_payer, [&](auto &r) {
+        r.global_id = global_id;
+        r.token_name = token_name;
+        r.category = category;
+        r.amount = quantity;
+      });
+    }
+    else
+    {
+      to_acnts.modify(to, same_payer, [&](auto &r) {
+        r.amount += quantity;
+      });
+    }
+  }
+
   /*** Contract Actions ***/
 
   ACTION reset(name category)
@@ -205,7 +236,56 @@ public:
     });
   }
 
-  ACTION issue(name to, name category, name token_name, double quantity, string metadata_uri, string memo) {}
+  ACTION issue(name to, name category, name token_name, double quantity, string metadata_uri, string memo)
+  {
+    check(quantity > 0, "must issue positive quantity");
+    check(memo.size() <= 256, "memo has more than 256 bytes");
+
+    tokenstatss _stats(_self, category.value);
+    auto itr_token = _stats.find(token_name.value);
+    check(itr_token != _stats.end(), "token does not exist");
+
+    const auto &token = *itr_token;
+
+    require_auth(token.issuer);
+    check(quantity <= token.max_supply - token.current_supply, "quantity exceeds available supply");
+
+    _stats.modify(itr_token, same_payer, [&](auto &r) {
+      r.current_supply += quantity;
+    });
+
+    _add_balance(token.issuer, token.global_id, category, token_name, quantity, token.issuer);
+
+    if (to != token.issuer)
+    {
+      SEND_INLINE_ACTION(*this, transfer, {{token.issuer, "active"_n}},
+                         {token.issuer, to, category, token_name, quantity, memo});
+    }
+  }
+
+  ACTION transfer(name from, name to, name category, name token_name, double quantity, string memo)
+  {
+    check(from != to, "cannot transfer to self");
+    check(quantity > 0, "must transfer positive quantity");
+    check(memo.size() <= 256, "memo has more than 256 bytes");
+
+    require_auth(from);
+    check(is_account(to), "to account does not exist");
+
+    tokenstatss _stats(_self, category.value);
+    auto itr_token = _stats.find(token_name.value);
+    check(itr_token != _stats.end(), "token does not exist");
+
+    const auto &token = *itr_token;
+
+    require_recipient(from);
+    require_recipient(to);
+
+    auto payer = has_auth(to) ? to : from;
+
+    _sub_balance(from, token.global_id, quantity);
+    _add_balance(to, token.global_id, category, token_name, quantity, payer);
+  }
 
   ACTION pausexfer(bool pause) {}
 
@@ -214,8 +294,6 @@ public:
   ACTION burn(name owner, uint64_t global_id, double quantity) {}
 
   ACTION transfernft(name from, name to, vector<uint64_t> tokeninfo_ids, string memo) {}
-
-  ACTION transfer(name from, name to, uint64_t global_id, double quantity, string memo) {}
 };
 
 EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer))

@@ -1,5 +1,5 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Sun Feb 24 19:59:59 2019",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Wed Feb 27 04:45:15 2019",
     "version": "eosio::abi/1.1",
     "structs": [
         {
@@ -245,8 +245,12 @@
                     "type": "name"
                 },
                 {
-                    "name": "global_id",
-                    "type": "uint64"
+                    "name": "category",
+                    "type": "name"
+                },
+                {
+                    "name": "token_name",
+                    "type": "name"
                 },
                 {
                     "name": "quantity",
