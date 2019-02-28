@@ -16,7 +16,8 @@ public:
       : contract(receiver, code, ds),
         _symbolinfo(receiver, receiver.value),
         _tokeninfos(receiver, receiver.value),
-        _categoryinfos(receiver, receiver.value)
+        _categoryinfos(receiver, receiver.value),
+        _players(receiver, receiver.value)
   {
   }
 
@@ -107,6 +108,24 @@ public:
     uint64_t primary_key() const { return global_id; }
   };
 
+  struct st_stats
+  {
+    uint64_t key;
+    uint64_t value;
+  };
+
+  TABLE player
+  {
+    name owner;
+    string mc_username;
+    bool confirmed;
+    vector<account> chest = {};
+    vector<uint64_t> nft_chest = {};
+    vector<st_stats> stats = {};
+
+    uint64_t primary_key() const { return owner.value; }
+  };
+
   /*** Table definitions ***/
   typedef eosio::multi_index<"tokenstats"_n, tokenstats> tokenstatss;
   typedef eosio::multi_index<"account"_n, account> accounts;
@@ -118,6 +137,8 @@ public:
   categoryinfos _categoryinfos;
   typedef eosio::multi_index<"tokeninfo"_n, tokeninfo> tokeninfos;
   tokeninfos _tokeninfos;
+  typedef eosio::multi_index<"player"_n, player> players;
+  players _players;
 
   /*** Config Accessors ***/
   symbolinfo _get_symbolinfo()
@@ -154,8 +175,8 @@ public:
     auto cat = _categoryinfos.find(category.value);
     if (cat == _categoryinfos.end())
     {
-      _categoryinfos.emplace(_self, [&](auto &r) {
-        r.category = category;
+      _categoryinfos.emplace(_self, [&](auto &row) {
+        row.category = category;
       });
     }
   }
@@ -167,8 +188,8 @@ public:
     const auto &from = from_acnts.get(global_id, "no balance object found");
     eosio_assert(from.amount >= quantity, "overdrawn balance");
 
-    from_acnts.modify(from, owner, [&](auto &r) {
-      r.amount -= quantity;
+    from_acnts.modify(from, owner, [&](auto &row) {
+      row.amount -= quantity;
     });
   }
 
@@ -178,17 +199,17 @@ public:
     auto to = to_acnts.find(global_id);
     if (to == to_acnts.end())
     {
-      to_acnts.emplace(ram_payer, [&](auto &r) {
-        r.global_id = global_id;
-        r.token_name = token_name;
-        r.category = category;
-        r.amount = quantity;
+      to_acnts.emplace(ram_payer, [&](auto &row) {
+        row.global_id = global_id;
+        row.token_name = token_name;
+        row.category = category;
+        row.amount = quantity;
       });
     }
     else
     {
-      to_acnts.modify(to, same_payer, [&](auto &r) {
-        r.amount += quantity;
+      to_acnts.modify(to, same_payer, [&](auto &row) {
+        row.amount += quantity;
       });
     }
   }
@@ -204,11 +225,14 @@ public:
     si.global_id = 0;
     _update_symbolinfo(si);
 
+    int erased_rows = 0;
+    int MAX_ERASED_ROWS_PER_ACTION = 50;
     tokenstatss _stats(_self, category.value);
     auto itr = _stats.begin();
-    while (itr != _stats.end())
+    while (itr != _stats.end() && erased_rows < MAX_ERASED_ROWS_PER_ACTION)
     {
       itr = _stats.erase(itr);
+      erased_rows++;
     }
   }
 
@@ -224,15 +248,15 @@ public:
 
     _check_and_add_category(category);
 
-    _stats.emplace(_self, [&](auto &r) {
-      r.token_name = token_name;
-      r.global_id = _next_id();
-      r.issuer = issuer;
-      r.fungible = fungible;
-      r.burnable = burnable;
-      r.transferable = transferable;
-      r.current_supply = 0;
-      r.max_supply = max_supply;
+    _stats.emplace(_self, [&](auto &row) {
+      row.token_name = token_name;
+      row.global_id = _next_id();
+      row.issuer = issuer;
+      row.fungible = fungible;
+      row.burnable = burnable;
+      row.transferable = transferable;
+      row.current_supply = 0;
+      row.max_supply = max_supply;
     });
   }
 
@@ -250,8 +274,8 @@ public:
     require_auth(token.issuer);
     check(quantity <= token.max_supply - token.current_supply, "quantity exceeds available supply");
 
-    _stats.modify(itr_token, same_payer, [&](auto &r) {
-      r.current_supply += quantity;
+    _stats.modify(itr_token, same_payer, [&](auto &row) {
+      row.current_supply += quantity;
     });
 
     _add_balance(token.issuer, token.global_id, category, token_name, quantity, token.issuer);
@@ -294,6 +318,46 @@ public:
   ACTION burn(name owner, uint64_t global_id, double quantity) {}
 
   ACTION transfernft(name from, name to, vector<uint64_t> tokeninfo_ids, string memo) {}
+
+  ACTION setplayer(name owner, string mc_username)
+  {
+    require_auth(owner);
+
+    check(mc_username.length() > 3, "Invalid Minecraft username");
+
+    auto itr_player = _players.find(owner.value);
+
+    if (itr_player == _players.end())
+    {
+      _players.emplace(owner, [&](auto &row) {
+        row.owner = owner;
+        row.mc_username = mc_username;
+        row.confirmed = false;
+      });
+    }
+    else
+    {
+      _players.modify(itr_player, same_payer, [&](auto &row) {
+        row.mc_username = mc_username;
+        row.confirmed = false;
+      });
+    }
+  }
+
+  ACTION acceptplayer(name owner, string mc_username)
+  {
+    require_auth(_self);
+
+    auto itr_player = _players.find(owner.value);
+    check(itr_player != _players.end(), "EOS account not requested");
+
+    const auto &player = *itr_player;
+    check(player.mc_username == mc_username, "Invalid Minecraft username");
+
+    _players.modify(itr_player, same_payer, [&](auto &row) {
+      row.confirmed = true;
+    });
+  }
 };
 
-EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer))
+EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer)(setplayer)(acceptplayer))

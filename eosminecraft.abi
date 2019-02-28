@@ -1,7 +1,21 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Wed Feb 27 04:45:15 2019",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Thu Feb 28 07:06:59 2019",
     "version": "eosio::abi/1.1",
     "structs": [
+        {
+            "name": "acceptplayer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "mc_username",
+                    "type": "string"
+                }
+            ]
+        },
         {
             "name": "account",
             "base": "",
@@ -141,12 +155,70 @@
             ]
         },
         {
+            "name": "player",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "mc_username",
+                    "type": "string"
+                },
+                {
+                    "name": "confirmed",
+                    "type": "bool"
+                },
+                {
+                    "name": "chest",
+                    "type": "account[]"
+                },
+                {
+                    "name": "nft_chest",
+                    "type": "uint64[]"
+                },
+                {
+                    "name": "stats",
+                    "type": "st_stats[]"
+                }
+            ]
+        },
+        {
             "name": "reset",
             "base": "",
             "fields": [
                 {
                     "name": "category",
                     "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "setplayer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "mc_username",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "st_stats",
+            "base": "",
+            "fields": [
+                {
+                    "name": "key",
+                    "type": "uint64"
+                },
+                {
+                    "name": "value",
+                    "type": "uint64"
                 }
             ]
         },
@@ -288,6 +360,11 @@
     "types": [],
     "actions": [
         {
+            "name": "acceptplayer",
+            "type": "acceptplayer",
+            "ricardian_contract": ""
+        },
+        {
             "name": "burn",
             "type": "burn",
             "ricardian_contract": ""
@@ -318,6 +395,11 @@
             "ricardian_contract": ""
         },
         {
+            "name": "setplayer",
+            "type": "setplayer",
+            "ricardian_contract": ""
+        },
+        {
             "name": "transfer",
             "type": "transfer",
             "ricardian_contract": ""
@@ -339,6 +421,13 @@
         {
             "name": "categoryinfo",
             "type": "categoryinfo",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "player",
+            "type": "player",
             "index_type": "i64",
             "key_names": [],
             "key_types": []
