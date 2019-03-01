@@ -4,17 +4,19 @@ import JsSignatureProvider from "eosjs/dist/eosjs-jssig";
 import nodeFetch from "node-fetch";
 import { chainInfo, eosAccount } from "../settings";
 
-const rpc = new JsonRpc(chainInfo.address, { fetch: nodeFetch });
+export const EOS_RPC = new JsonRpc(chainInfo.address, { fetch: nodeFetch });
 
 const signatureProvider = new JsSignatureProvider([eosAccount.privateKey]);
 const api = new Api({
-  rpc,
   signatureProvider,
+  rpc: EOS_RPC,
   textDecoder: new TextDecoder(),
   textEncoder: new TextEncoder()
 });
 
-export const getChainInfo = async () => await rpc.get_info();
+export const isRpcError = err => err instanceof RpcError;
+
+export const getChainInfo = async () => await EOS_RPC.get_info();
 
 export const signTransaction = async (
   contract = "eosminecraft",
@@ -22,27 +24,20 @@ export const signTransaction = async (
   data: any,
   authorization = eosAccount.authorization
 ) => {
-  try {
-    return await api.transact(
-      {
-        actions: [
-          {
-            authorization,
-            data,
-            account: contract,
-            name: action
-          }
-        ]
-      },
-      {
-        blocksBehind: 3,
-        expireSeconds: 30
-      }
-    );
-  } catch (e) {
-    console.error(`\nCaught exception: ${e}`);
-    if (e instanceof RpcError) {
-      console.error(JSON.stringify(e.json, null, 2));
+  return await api.transact(
+    {
+      actions: [
+        {
+          authorization,
+          data,
+          account: contract,
+          name: action
+        }
+      ]
+    },
+    {
+      blocksBehind: 3,
+      expireSeconds: 30
     }
-  }
+  );
 };
