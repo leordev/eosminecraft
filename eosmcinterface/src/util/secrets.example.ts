@@ -1,0 +1,1 @@
+export const EOS_PRIVATE_KEY = "YOUR-PRIVATE-KEY-GOES-HERE";
