@@ -26,6 +26,8 @@ const setRoutes = app => {
     })
   );
   app.get("/account/:account", accountController.getInfo);
+  app.get("/player/:account", accountController.getPlayerInfo);
+  app.post("/player/:account/confirm", accountController.postConfirmPlayer);
   app.post("/deposit", depositController.postDeposit);
   app.post("/withdraw", withdrawController.postWithdraw);
 };
@@ -36,11 +38,13 @@ const setErrorHandler = app => {
 
     const rpcError = isRpcError(err) && err.json.error;
     const message = rpcError ? "Chain RPC Error" : err.message;
-    const response = {
+    const errorObj = {
       error: message,
-      details: rpcError || {},
       timestamp: new Date()
     };
+
+    const details = rpcError || err.details;
+    const response = details ? { ...errorObj, details } : errorObj;
 
     res.status(500).send(response);
   });

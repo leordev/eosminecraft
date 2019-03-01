@@ -2,7 +2,7 @@ import { TextEncoder, TextDecoder } from "text-encoding";
 import { Api, JsonRpc, RpcError } from "eosjs";
 import JsSignatureProvider from "eosjs/dist/eosjs-jssig";
 import nodeFetch from "node-fetch";
-import { chainInfo, eosAccount } from "../settings";
+import { chainInfo, eosAccount } from "../../settings";
 
 export const EOS_RPC = new JsonRpc(chainInfo.address, { fetch: nodeFetch });
 
@@ -19,9 +19,9 @@ export const isRpcError = err => err instanceof RpcError;
 export const getChainInfo = async () => await EOS_RPC.get_info();
 
 export const signTransaction = async (
-  contract = "eosminecraft",
   action: string,
   data: any,
+  contract = "eosminecraft",
   authorization = eosAccount.authorization
 ) => {
   return await api.transact(
