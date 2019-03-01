@@ -20,6 +20,7 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
+    "array.prototype.flat": "^1.2.1",
     "body-parser": "^1.18.3",
     "eosjs": "^20.0.0-beta3",
     "errorhandler": "^1.5.0",

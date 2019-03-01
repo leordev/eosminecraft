@@ -28,8 +28,8 @@ const setRoutes = app => {
   app.get("/account/:account", accountController.getInfo);
   app.get("/player/:account", accountController.getPlayerInfo);
   app.post("/player/:account/confirm", accountController.postConfirmPlayer);
-  app.post("/deposit", depositController.postDeposit);
-  app.post("/withdraw", withdrawController.postWithdraw);
+  app.post("/player/:account/deposit", depositController.postDeposit);
+  app.post("/player/:account/withdraw", withdrawController.postWithdraw);
 };
 
 const setErrorHandler = app => {
