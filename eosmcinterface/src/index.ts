@@ -6,6 +6,7 @@ import "./util/logger";
 import * as accountController from "./controllers/account";
 import * as depositController from "./controllers/deposit";
 import * as withdrawController from "./controllers/withdraw";
+import { getChainInfo } from "./util/eos";
 
 const initializeServer = () => {
   const app = express();
@@ -20,7 +21,12 @@ const initializeServer = () => {
 };
 
 const setRoutes = app => {
-  app.get("/", (_, res) => res.send("EOS Minecraft Interface"));
+  app.get("/", async (_, res) =>
+    res.send({
+      motd: "EOS Minecraft Interface",
+      chainInfo: await getChainInfo()
+    })
+  );
   app.get("/account", accountController.getInfo);
   app.post("/deposit", depositController.postDeposit);
   app.post("/withdraw", withdrawController.postWithdraw);
