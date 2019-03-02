@@ -41,12 +41,14 @@ export const signSimpleTransaction = async (name: string, data: any) => {
 };
 
 export const signMultiTransaction = async (actions: ActionData[]) => {
+  console.info(`\n>>> Signing Transaction: ${JSON.stringify(actions)}`);
   const transaction = await api.transact(
     { actions },
     defaultTransactionOptions
   );
+  const { id, block_num, block_time } = transaction.processed;
   console.info(
-    `>>> Signed transaction:\n ${JSON.stringify(transaction, null, 2)}`
+    `<<< Signed transaction: ${id} - BlockNum: ${block_num} @ ${block_time}\n`
   );
   return transaction;
 };
