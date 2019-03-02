@@ -10,7 +10,7 @@ import { getChainInfo, isRpcError } from "./util/eos";
 const initializeServer = () => {
   const app = express();
 
-  app.set("port", process.env.PORT || 3000);
+  app.set("port", process.env.PORT || 5000);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(express.json({ limit: "1mb" }));
@@ -33,7 +33,7 @@ const setRoutes = app => {
 };
 
 const setErrorHandler = app => {
-  app.use((err, _req, res, _next) => {
+  app.use((err, req, res, _next) => {
     console.error("!!! ERROR:\n", err.stack);
 
     const rpcError = isRpcError(err) && err.json.error;
@@ -46,6 +46,7 @@ const setErrorHandler = app => {
     const details = rpcError || err.details;
     const response = details ? { ...errorObj, details } : errorObj;
 
+    console.error(req.body, response);
     res.status(500).send(response);
   });
 };
