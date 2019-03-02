@@ -1,28 +1,11 @@
 import { getAccountItems, AccountItemProps } from "../util/eos/data";
 import { eosAccount } from "../settings";
 import flat from "array.prototype.flat";
-
-const issueItemAction = (to: string, token_name: string, quantity: number) => ({
-  to,
-  token_name,
-  quantity,
-  category: "minecraft",
-  metadata_uri: "",
-  memo: "deposit"
-});
-
-const transferItemAction = (
-  to: string,
-  token_name: string,
-  quantity: number
-) => ({
-  to,
-  token_name,
-  quantity,
-  from: eosAccount.accountName,
-  category: "minecraft",
-  memo: "deposit"
-});
+import {
+  transferItemAction,
+  issueItemAction,
+  signMultiTransaction
+} from "../util/eos/transact";
 
 const calcAndTransferActions = (
   serverItem: AccountItemProps,
@@ -49,7 +32,6 @@ export const postDeposit = async (req, res, next) => {
     const { account } = req.params;
     const { items } = req.body;
 
-    console.info(account, items);
     if (!account || !items) throw new Error("Invalid account or items list");
 
     const serverItems = await getAccountItems(eosAccount.accountName);
@@ -67,7 +49,10 @@ export const postDeposit = async (req, res, next) => {
       }
     }
 
-    res.send(flat(actions));
+    const flatActions = flat(actions);
+    const transaction = await signMultiTransaction(flatActions);
+
+    res.send({ success: true, transaction });
   } catch (error) {
     next(error);
   }

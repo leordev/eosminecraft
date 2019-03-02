@@ -1,5 +1,6 @@
-import { EOS_RPC, signTransaction } from "../util/eos";
+import { EOS_RPC } from "../util/eos";
 import { getPlayer } from "../util/eos/data";
+import { signSimpleTransaction } from "../util/eos/transact";
 
 export const getInfo = async (req, res, next) => {
   try {
@@ -48,13 +49,12 @@ export const postConfirmPlayer = async (req, res, next) => {
     if (mcUsername !== player.mc_username) {
       throw new Error("Player not authorized");
     } else {
-      await signTransaction("acceptplayer", {
+      const transaction = await signSimpleTransaction("acceptplayer", {
         owner: player.owner,
         mc_username: mcUsername
       });
+      res.send({ success: true, transaction });
     }
-
-    res.send({ success: true });
   } catch (error) {
     next(error);
   }
