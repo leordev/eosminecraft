@@ -47,8 +47,8 @@ const setErrorHandler = app => {
     const response = details ? { ...errorObj, details } : errorObj;
 
     console.error(`Endpoint: ${req.url}`);
-    console.error("Body:", req.body);
-    console.error("Response:", response);
+    console.error("Body:", req.body && JSON.stringify(req.body, null, 2));
+    console.error("Response:", JSON.stringify(response, null, 2));
     res.status(500).send(response);
   });
 };

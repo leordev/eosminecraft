@@ -24,3 +24,9 @@ curl -X POST -H 'Content-Type: application/json' -d '{
 ```
 
 PS: Do yourself a favor and install `jq` (`brew install jq`)
+
+## Minecraft Misc
+
+- minecraft-data folder has a kotlin dumper for FabricMC and Java dumper for SpigotMC
+- eos-items.csv were generated from SpigotMC
+- update the chain url you want to use and execute `./cleos-items.sh` to load Minecraft items after deployment
