@@ -46,7 +46,9 @@ const setErrorHandler = app => {
     const details = rpcError || err.details;
     const response = details ? { ...errorObj, details } : errorObj;
 
-    console.error(req.body, response);
+    console.error(`Endpoint: ${req.url}`);
+    console.error("Body:", req.body);
+    console.error("Response:", response);
     res.status(500).send(response);
   });
 };
