@@ -1,5 +1,5 @@
 import { eosAccount } from "../../settings";
-import { ActionData, Deposit } from "./interfaces";
+import { ActionData, Deposit, Withdraw } from "./interfaces";
 import { defaultTransactionOptions, api } from ".";
 
 export const makeDefaultAction = (name: string, data: any): ActionData => ({
@@ -40,7 +40,6 @@ export const issueItemAction = ({ to, token_name, quantity, memo }: Deposit) =>
     token_name,
     quantity,
     memo,
-    action: "issue",
     category: "minecraft",
     metadata_uri: ""
   });
@@ -57,5 +56,19 @@ export const transferItemAction = ({
     quantity,
     memo,
     from: eosAccount.accountName,
+    category: "minecraft"
+  });
+
+export const withdrawItemAction = ({
+  owner,
+  token_name,
+  quantity,
+  memo
+}: Withdraw) =>
+  makeDefaultAction("playerwt", {
+    owner,
+    token_name,
+    quantity,
+    memo,
     category: "minecraft"
   });

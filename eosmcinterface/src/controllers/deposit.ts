@@ -8,32 +8,20 @@ import {
 } from "../util/eos/transact";
 import { AccountItem, Deposit } from "../util/eos/interfaces";
 
-const calcAndTransferActions = (serverItem: AccountItem, item, to: string) => {
-  const actions = [] as any[];
-  const balanceDiff = serverItem.amount - item.quantity;
-  const transferAmount = balanceDiff >= 0 ? item.quantity : serverItem.amount;
+export const postDeposit = async (req, res, next) => {
+  try {
+    const { account } = req.params;
+    const { items } = req.body;
 
-  if (serverItem.amount > 0) {
-    const deposit: Deposit = {
-      to,
-      token_name: item.token_name,
-      quantity: transferAmount,
-      memo: item.memo
-    };
-    actions.push(transferItemAction(deposit));
+    if (!account || !items) throw new Error("Invalid account or items list");
+
+    const serverItems = await getAccountItems(eosAccount.accountName);
+    const actions = calculateActions(account, items, serverItems);
+    const transaction = await signMultiTransaction(actions);
+    res.send({ success: true, transaction });
+  } catch (error) {
+    next(error);
   }
-
-  if (balanceDiff < 0) {
-    const deposit: Deposit = {
-      to,
-      token_name: item.token_name,
-      quantity: balanceDiff * -1,
-      memo: item.memo
-    };
-    actions.push(issueItemAction(deposit));
-  }
-
-  return actions;
 };
 
 const calculateActions = (
@@ -63,18 +51,30 @@ const calculateActions = (
   return flat(actions);
 };
 
-export const postDeposit = async (req, res, next) => {
-  try {
-    const { account } = req.params;
-    const { items } = req.body;
+const calcAndTransferActions = (serverItem: AccountItem, item, to: string) => {
+  const actions = [] as any[];
+  const balanceDiff = serverItem.amount - item.quantity;
+  const transferAmount = balanceDiff >= 0 ? item.quantity : serverItem.amount;
 
-    if (!account || !items) throw new Error("Invalid account or items list");
-
-    const serverItems = await getAccountItems(eosAccount.accountName);
-    const actions = calculateActions(account, items, serverItems);
-    const transaction = await signMultiTransaction(actions);
-    res.send({ success: true, transaction });
-  } catch (error) {
-    next(error);
+  if (serverItem.amount > 0) {
+    const deposit: Deposit = {
+      to,
+      token_name: item.token_name,
+      quantity: transferAmount,
+      memo: item.memo
+    };
+    actions.push(transferItemAction(deposit));
   }
+
+  if (balanceDiff < 0) {
+    const deposit: Deposit = {
+      to,
+      token_name: item.token_name,
+      quantity: balanceDiff * -1,
+      memo: item.memo
+    };
+    actions.push(issueItemAction(deposit));
+  }
+
+  return actions;
 };

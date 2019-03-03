@@ -24,6 +24,13 @@ export interface Deposit {
   memo: string;
 }
 
+export interface Withdraw {
+  owner: string;
+  token_name: string;
+  quantity: number;
+  memo: string;
+}
+
 export interface Player {
   owner: string;
   mc_username: string;

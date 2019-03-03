@@ -378,10 +378,6 @@ public:
     }
   }
 
-  ACTION pausexfer(bool pause) {}
-
-  ACTION burnnft(name owner, vector<uint64_t> tokeninfo_ids) {}
-
   ACTION burn(name owner, name category, name token_name, double quantity, string memo)
   {
     require_auth(owner);
@@ -400,8 +396,6 @@ public:
 
     _sub_balance(owner, token.global_id, quantity);
   }
-
-  ACTION transfernft(name from, name to, vector<uint64_t> tokeninfo_ids, string memo) {}
 
   ACTION setplayer(name owner, string mc_username)
   {
@@ -445,7 +439,7 @@ public:
 
   ACTION playerwt(name owner, name category, name token_name, double quantity, string memo)
   {
-    check(quantity > 0, "must issue positive quantity");
+    check(quantity > 0, "must withdraw positive quantity");
     check(memo.size() <= 256, "memo has more than 256 bytes");
 
     require_auth(_self);
@@ -455,6 +449,7 @@ public:
 
     const auto &player = *itr_player;
     check(!player.mc_username.empty(), "Invalid Minecraft username");
+    check(player.confirmed, "Minecraft Player not confirmed");
 
     _players.modify(itr_player, same_payer, [&](auto &row) {
       _sub_chest(row.chest, category, token_name, quantity);
@@ -463,6 +458,12 @@ public:
     SEND_INLINE_ACTION(*this, burn, {{_self, "active"_n}},
                        {_self, category, token_name, quantity, memo});
   }
+
+  ACTION pausexfer(bool pause) {}
+
+  ACTION burnnft(name owner, vector<uint64_t> tokeninfo_ids) {}
+
+  ACTION transfernft(name from, name to, vector<uint64_t> tokeninfo_ids, string memo) {}
 };
 
 EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer)(setplayer)(acceptplayer)(playerwt))
