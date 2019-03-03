@@ -1,5 +1,5 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Thu Feb 28 07:06:59 2019",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Sun Mar  3 11:59:16 2019",
     "version": "eosio::abi/1.1",
     "structs": [
         {
@@ -47,12 +47,20 @@
                     "type": "name"
                 },
                 {
-                    "name": "global_id",
-                    "type": "uint64"
+                    "name": "category",
+                    "type": "name"
+                },
+                {
+                    "name": "token_name",
+                    "type": "name"
                 },
                 {
                     "name": "quantity",
                     "type": "float64"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
                 }
             ]
         },
@@ -181,6 +189,32 @@
                 {
                     "name": "stats",
                     "type": "st_stats[]"
+                }
+            ]
+        },
+        {
+            "name": "playerwt",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "category",
+                    "type": "name"
+                },
+                {
+                    "name": "token_name",
+                    "type": "name"
+                },
+                {
+                    "name": "quantity",
+                    "type": "float64"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
                 }
             ]
         },
@@ -387,6 +421,11 @@
         {
             "name": "pausexfer",
             "type": "pausexfer",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "playerwt",
+            "type": "playerwt",
             "ricardian_contract": ""
         },
         {

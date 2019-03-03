@@ -214,6 +214,68 @@ public:
     }
   }
 
+  void _add_chest(name from, name category, tokenstats token, double quantity)
+  {
+    auto itr_player = _players.find(from.value);
+
+    if (itr_player == _players.end())
+    {
+      _players.emplace(from, [&](auto &row) {
+        row.owner = from;
+        row.confirmed = false;
+        account new_item{token.global_id, category, token.token_name, quantity};
+        row.chest.emplace_back(new_item);
+      });
+    }
+    else
+    {
+      _players.modify(itr_player, same_payer, [&](auto &row) {
+        bool item_found = false;
+        for (account &player_token : row.chest)
+        {
+          if (player_token.global_id == token.global_id)
+          {
+            player_token.amount += quantity;
+            item_found = true;
+            break;
+          }
+        }
+
+        if (!item_found)
+        {
+          account new_item{token.global_id, category, token.token_name, quantity};
+          row.chest.emplace_back(new_item);
+        }
+      });
+    }
+  }
+
+  void _sub_chest(vector<account> & chest, name category, name token_name, double quantity)
+  {
+    bool item_found = false;
+    for (auto chest_itr = chest.begin(); chest_itr != chest.end();)
+    {
+      auto &player_token = *chest_itr;
+      item_found = player_token.category == category && player_token.token_name == token_name;
+
+      if (item_found)
+      {
+        check(quantity <= player_token.amount, "insufficient balance");
+        player_token.amount -= quantity;
+
+        if (player_token.amount == 0)
+        {
+          chest_itr = chest.erase(chest_itr);
+        }
+        break;
+      }
+
+      chest_itr++;
+    }
+
+    check(item_found, "item not found");
+  }
+
   /*** Contract Actions ***/
 
   ACTION reset(name category)
@@ -309,13 +371,35 @@ public:
 
     _sub_balance(from, token.global_id, quantity);
     _add_balance(to, token.global_id, category, token_name, quantity, payer);
+
+    if (to == _self)
+    {
+      _add_chest(from, category, token, quantity);
+    }
   }
 
   ACTION pausexfer(bool pause) {}
 
   ACTION burnnft(name owner, vector<uint64_t> tokeninfo_ids) {}
 
-  ACTION burn(name owner, uint64_t global_id, double quantity) {}
+  ACTION burn(name owner, name category, name token_name, double quantity, string memo)
+  {
+    require_auth(owner);
+
+    tokenstatss _stats(_self, category.value);
+    auto itr_token = _stats.find(token_name.value);
+    check(itr_token != _stats.end(), "token does not exist");
+
+    const auto &token = *itr_token;
+    check(token.burnable, "token not burnable");
+    check(quantity <= token.current_supply, "overdrawn supply");
+
+    _stats.modify(itr_token, same_payer, [&](auto &row) {
+      row.current_supply -= quantity;
+    });
+
+    _sub_balance(owner, token.global_id, quantity);
+  }
 
   ACTION transfernft(name from, name to, vector<uint64_t> tokeninfo_ids, string memo) {}
 
@@ -358,6 +442,27 @@ public:
       row.confirmed = true;
     });
   }
+
+  ACTION playerwt(name owner, name category, name token_name, double quantity, string memo)
+  {
+    check(quantity > 0, "must issue positive quantity");
+    check(memo.size() <= 256, "memo has more than 256 bytes");
+
+    require_auth(_self);
+
+    auto itr_player = _players.find(owner.value);
+    check(itr_player != _players.end(), "Invalid EOS player account");
+
+    const auto &player = *itr_player;
+    check(!player.mc_username.empty(), "Invalid Minecraft username");
+
+    _players.modify(itr_player, same_payer, [&](auto &row) {
+      _sub_chest(row.chest, category, token_name, quantity);
+    });
+
+    SEND_INLINE_ACTION(*this, burn, {{_self, "active"_n}},
+                       {_self, category, token_name, quantity, memo});
+  }
 };
 
-EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer)(setplayer)(acceptplayer))
+EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer)(setplayer)(acceptplayer)(playerwt))
