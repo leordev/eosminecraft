@@ -27,6 +27,8 @@ export const getPlayerInfo = async (req, res, next) => {
       throw new Error("Player not found");
     }
 
+    console.info("Sending player info", player);
+
     res.send(player);
   } catch (error) {
     next(error);
