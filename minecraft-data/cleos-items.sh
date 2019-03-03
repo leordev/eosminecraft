@@ -149,7 +149,7 @@ $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.fe
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "spruce.fence", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "birch.fence", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "jungle.fence", true, true, true, 999999999999]' -p eosminecraft
-$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "dark.oak.fen", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "dark.oak.fe1", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "acacia.fence", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "end.rod", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "chorus.plant", true, true, true, 999999999999]' -p eosminecraft
@@ -406,9 +406,9 @@ $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.3"
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.4", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.5", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.1", true, true, true, 999999999999]' -p eosminecraft
-$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.1", true, true, true, 999999999999]' -p eosminecraft
-$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.1", true, true, true, 999999999999]' -p eosminecraft
-$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.1", true, true, true, 999999999999]' -p eosminecraft
-$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.11", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.2", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record11", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record12", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.11", true, true, true, 999999999999]' -p eosminecraft
 $CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.12", true, true, true, 999999999999]' -p eosminecraft
+$CLEOS push action eosminecraft create '["eosminecraft", "minecraft", "record.13", true, true, true, 999999999999]' -p eosminecraft

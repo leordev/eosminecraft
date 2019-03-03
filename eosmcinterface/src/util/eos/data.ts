@@ -1,15 +1,7 @@
 import { EOS_RPC } from ".";
+import { Player, AccountItem } from "./interfaces";
 
-export interface PlayerProps {
-  owner: string;
-  mc_username: string;
-  confirmed: boolean;
-  chest: any[];
-  nft_chest: any[];
-  stats: any[];
-}
-
-export const getPlayer = async (account: string): Promise<PlayerProps> => {
+export const getPlayer = async (account: string): Promise<Player> => {
   const players = await EOS_RPC.get_table_rows({
     json: true,
     code: "eosminecraft",
@@ -22,16 +14,9 @@ export const getPlayer = async (account: string): Promise<PlayerProps> => {
   return player;
 };
 
-export interface AccountItemProps {
-  global_id: number;
-  category: string;
-  token_name: string;
-  amount: number;
-}
-
 export const getAccountItems = async (
   account: string
-): Promise<AccountItemProps[]> => {
+): Promise<AccountItem[]> => {
   const items = await EOS_RPC.get_table_rows({
     json: true,
     code: "eosminecraft",

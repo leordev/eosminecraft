@@ -1,4 +1,4 @@
-import { getAccountItems, AccountItemProps } from "../util/eos/data";
+import { getAccountItems } from "../util/eos/data";
 import { eosAccount } from "../settings";
 import flat from "array.prototype.flat";
 import {
@@ -6,22 +6,31 @@ import {
   issueItemAction,
   signMultiTransaction
 } from "../util/eos/transact";
+import { AccountItem, Deposit } from "../util/eos/interfaces";
 
-const calcAndTransferActions = (
-  serverItem: AccountItemProps,
-  item,
-  to: string
-) => {
+const calcAndTransferActions = (serverItem: AccountItem, item, to: string) => {
   const actions = [] as any[];
   const balanceDiff = serverItem.amount - item.quantity;
   const transferAmount = balanceDiff >= 0 ? item.quantity : serverItem.amount;
 
   if (serverItem.amount > 0) {
-    actions.push(transferItemAction(to, item.token_name, transferAmount));
+    const deposit: Deposit = {
+      to,
+      token_name: item.token_name,
+      quantity: transferAmount,
+      memo: item.memo
+    };
+    actions.push(transferItemAction(deposit));
   }
 
   if (balanceDiff < 0) {
-    actions.push(issueItemAction(to, item.token_name, balanceDiff * -1));
+    const deposit: Deposit = {
+      to,
+      token_name: item.token_name,
+      quantity: balanceDiff * -1,
+      memo: item.memo
+    };
+    actions.push(issueItemAction(deposit));
   }
 
   return actions;
@@ -39,9 +48,13 @@ const calculateActions = (
     );
 
     if (!serverItem) {
-      actions.push(
-        issueItemAction(playerAccount, item.token_name, item.quantity)
-      );
+      const deposit: Deposit = {
+        to: playerAccount,
+        token_name: item.token_name,
+        quantity: item.quantity,
+        memo: item.memo
+      };
+      actions.push(issueItemAction(deposit));
     } else {
       actions.push(calcAndTransferActions(serverItem, item, playerAccount));
     }

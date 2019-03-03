@@ -147,7 +147,7 @@ src_id,src_name,category,token_name,fungible,burnable,transferable,max_supply
 188,SPRUCE_FENCE,minecraft,spruce.fence,true,true,true,999999999999
 189,BIRCH_FENCE,minecraft,birch.fence,true,true,true,999999999999
 190,JUNGLE_FENCE,minecraft,jungle.fence,true,true,true,999999999999
-191,DARK_OAK_FENCE,minecraft,dark.oak.fen,true,true,true,999999999999
+191,DARK_OAK_FENCE,minecraft,dark.oak.fe1,true,true,true,999999999999
 192,ACACIA_FENCE,minecraft,acacia.fence,true,true,true,999999999999
 198,END_ROD,minecraft,end.rod,true,true,true,999999999999
 199,CHORUS_PLANT,minecraft,chorus.plant,true,true,true,999999999999
@@ -404,9 +404,9 @@ src_id,src_name,category,token_name,fungible,burnable,transferable,max_supply
 2259,RECORD_4,minecraft,record.4,true,true,true,999999999999
 2260,RECORD_5,minecraft,record.5,true,true,true,999999999999
 2261,RECORD_6,minecraft,record.1,true,true,true,999999999999
-2262,RECORD_7,minecraft,record.1,true,true,true,999999999999
-2263,RECORD_8,minecraft,record.1,true,true,true,999999999999
-2264,RECORD_9,minecraft,record.1,true,true,true,999999999999
+2262,RECORD_7,minecraft,record.2,true,true,true,999999999999
+2263,RECORD_8,minecraft,record11,true,true,true,999999999999
+2264,RECORD_9,minecraft,record12,true,true,true,999999999999
 2265,RECORD_10,minecraft,record.11,true,true,true,999999999999
-2266,RECORD_11,minecraft,record.11,true,true,true,999999999999
-2267,RECORD_12,minecraft,record.12,true,true,true,999999999999
+2266,RECORD_11,minecraft,record.12,true,true,true,999999999999
+2267,RECORD_12,minecraft,record.13,true,true,true,999999999999
