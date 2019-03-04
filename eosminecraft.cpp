@@ -298,6 +298,27 @@ public:
     }
   }
 
+  ACTION resetplayer(name owner)
+  {
+    // debug reset data
+    require_auth(_self);
+
+    auto itr_player = _players.find(owner.value);
+    if(itr_player != _players.end()) {
+      _players.erase(itr_player);
+    }
+
+    int erased_rows = 0;
+    int MAX_ERASED_ROWS_PER_ACTION = 50;
+    accounts _accs(_self, owner.value);
+    auto itr = _accs.begin();
+    while (itr != _accs.end() && erased_rows < MAX_ERASED_ROWS_PER_ACTION)
+    {
+      itr = _accs.erase(itr);
+      erased_rows++;
+    }
+  }
+
   ACTION create(name issuer, name category, name token_name, bool fungible, bool burnable, bool transferable, int64_t max_supply)
   {
     require_auth(_self);
@@ -466,4 +487,4 @@ public:
   ACTION transfernft(name from, name to, vector<uint64_t> tokeninfo_ids, string memo) {}
 };
 
-EOSIO_DISPATCH(eosminecraft, (reset)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer)(setplayer)(acceptplayer)(playerwt))
+EOSIO_DISPATCH(eosminecraft, (reset)(resetplayer)(create)(issue)(pausexfer)(burnnft)(burn)(transfernft)(transfer)(setplayer)(acceptplayer)(playerwt))

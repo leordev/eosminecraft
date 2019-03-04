@@ -1,5 +1,5 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Sun Mar  3 12:41:06 2019",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Sun Mar  3 18:32:04 2019",
     "version": "eosio::abi/1.1",
     "structs": [
         {
@@ -229,6 +229,16 @@
             ]
         },
         {
+            "name": "resetplayer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                }
+            ]
+        },
+        {
             "name": "setplayer",
             "base": "",
             "fields": [
@@ -431,6 +441,11 @@
         {
             "name": "reset",
             "type": "reset",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "resetplayer",
+            "type": "resetplayer",
             "ricardian_contract": ""
         },
         {
